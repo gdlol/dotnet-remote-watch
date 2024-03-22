@@ -1,0 +1,47 @@
+{
+  "name": "dotnet-remote-watch",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "devcontainer",
+  "remoteUser": "dev",
+  "workspaceFolder": "/workspaces/dotnet-remote-watch",
+  "overrideCommand": true,
+  "features": {
+    "ghcr.io/devcontainer-config/features/user-init:1": {},
+    "ghcr.io/devcontainer-config/features/dot-config:1": {},
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" },
+    "ghcr.io/devcontainers/features/dotnet:2": { "version": "8.0" }
+  },
+  "customizations": {
+    "vscode": {
+      // spell-checker:ignore esbenp azuretools dotnettools
+      "extensions": [
+        "csharpier.csharpier-vscode",
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "ms-azuretools.vscode-docker",
+        "ms-dotnettools.csharp"
+      ],
+      "settings": {
+        "files.associations": {
+          "ignore": "ignore",
+          "attributes": "properties",
+          "rc": "properties"
+        },
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[dockerfile]": {
+          "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+        },
+        "[csharp]": {
+          "editor.defaultFormatter": "csharpier.csharpier-vscode"
+        },
+        "cSpell.autoFormatConfigFile": true,
+        "cSpell.checkOnlyEnabledFileTypes": false
+      }
+    }
+  },
+  "onCreateCommand": {
+    "csharpier": "dotnet tool install csharpier --global --version 0.27.3",
+    "restore": "pnpm restore"
+  }
+}

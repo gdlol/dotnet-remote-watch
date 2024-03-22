@@ -1,0 +1,8 @@
+<Project>
+  <Target Name="BuildHotReloadClient" AfterTargets="Build">
+    <Exec
+      Command="dotnet remote-watch"
+      EnvironmentVariables="RemoteWatchBuildClient=1;RemoteWatchTargetDir=$(TargetDir);RemoteWatchTargetAssemblyName=$(AssemblyName);RemoteWatchRuntimeIdentifier=$(RuntimeIdentifier)"
+    />
+  </Target>
+</Project>

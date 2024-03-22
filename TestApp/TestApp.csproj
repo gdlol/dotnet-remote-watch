@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <SelfContained>true</SelfContained>
+    <OutDir>$([MSBuild]::NormalizeDirectory($(ProjectRoot), "Bin", "TestApp"))/</OutDir>
+  </PropertyGroup>
+
+  <Import Project="$(RemoteWatchTargets)" Condition="'$(RemoteWatchTargets)' != ''" />
+</Project>

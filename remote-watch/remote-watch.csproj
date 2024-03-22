@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>HotReload.Remote.Watch</RootNamespace>
+
+    <PackAsTool>true</PackAsTool>
+    <AssemblyName>drw</AssemblyName>
+    <ToolCommandName>dotnet-remote-watch</ToolCommandName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../HotReload.Common/HotReload.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.Cli.Utils" />
+    <PackageReference Include="MinVer">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="RemoteWatch.targets" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../HotReload.Common/*" CopyToOutputDirectory="PreserveNewest" LinkBase="HotReload.Common" />
+    <None Include="../HotReload.Client/*" CopyToOutputDirectory="PreserveNewest" LinkBase="HotReload.Client" />
+    <None Include="$(ProjectRoot)ReadMe.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

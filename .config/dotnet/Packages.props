@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Cake.Frosting" Version="4.0.0" />
+    <PackageVersion Include="Microsoft.DotNet.Cli.Utils" Version="2.0.0" />
+    <PackageVersion Include="MinVer" Version="5.0.0" />
+  </ItemGroup>
+</Project>
