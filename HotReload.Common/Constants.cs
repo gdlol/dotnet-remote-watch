@@ -41,5 +41,9 @@ public static class Constants
         public const string TargetAssemblyNamedPipeName = "RemoteWatchTargetAssemblyNamedPipeName";
 
         public const string NamedPipeName = "RemoteWatchNamedPipeName";
+
+        public const string PidChannel = "RemoteWatchPidChannel";
+
+        public const string HealthChannel = "RemoteWatchHealthChannel";
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using Microsoft.DotNet.Cli.Utils;
 using Constants = HotReload.Common.Constants;
 
@@ -66,7 +67,21 @@ else
         TargetAssemblyName.Listen();
         NamedPipeForwarder.Start();
 
-        var result = Command.CreateDotNet("watch", Environment.GetCommandLineArgs().Skip(1)).Execute();
-        return result.ExitCode;
+        using var dotnetWatch = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = ArgumentEscaper.EscapeAndConcatenateArgArrayForProcessStart(
+                    ["watch", .. Environment.GetCommandLineArgs().Skip(1)]
+                ),
+                UseShellExecute = false,
+            }
+        };
+        AppDomain.CurrentDomain.ProcessExit += (_, _) => dotnetWatch.Kill(entireProcessTree: true);
+        dotnetWatch.Start();
+        await dotnetWatch.WaitForExitAsync();
+
+        return dotnetWatch.ExitCode;
     }
 }

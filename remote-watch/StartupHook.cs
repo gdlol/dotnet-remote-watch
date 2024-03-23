@@ -41,35 +41,21 @@ internal class StartupHook
             );
         Environment.SetEnvironmentVariable(Constants.DotNet.StartupHooks, string.Join(Path.PathSeparator, hooks));
 
-        Task.Run(async () =>
+        _ = Task.Run(async () =>
         {
             try
             {
                 using var hotReloadNamedPipe = NamedPipe.CreateClient(hotReloadNamedPipeName);
-                try
-                {
-                    await hotReloadNamedPipe.ConnectAsync(5000);
-                }
-                catch (TimeoutException)
-                {
-                    Logger.Log($"Unable to connect to hot reload named pipe.");
-                    return;
-                }
+                await hotReloadNamedPipe.ConnectAsync();
 
                 using var remoteWatchNamedPipe = NamedPipe.CreateClient(remoteWatchNamedPipeName);
-                try
-                {
-                    await remoteWatchNamedPipe.ConnectAsync(5000);
-                }
-                catch (TimeoutException)
-                {
-                    Logger.Log($"Unable to connect to remote watch named pipe.");
-                    return;
-                }
+                await remoteWatchNamedPipe.ConnectAsync();
 
                 // Wait ready.
-                await remoteWatchNamedPipe.ReadExactlyAsync(new byte[1]);
                 var writer = PipeWriter.Create(remoteWatchNamedPipe);
+
+                Logger.Log($"Sending PID ({Environment.ProcessId}) to remote watch named pipe...");
+                await writer.WriteIntAsync(Environment.ProcessId);
 
                 Logger.Log($"Sending {Constants.DeltaApplierDllName} to client...");
                 {
@@ -94,7 +80,7 @@ internal class StartupHook
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex);
+                Logger.Log(ex.ToString());
             }
         });
 

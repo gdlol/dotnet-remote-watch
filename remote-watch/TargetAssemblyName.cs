@@ -11,7 +11,7 @@ internal class TargetAssemblyName
         Environment.SetEnvironmentVariable(Constants.RemoteWatch.TargetAssemblyNamedPipeName, pipeName);
 
         Logger.Log("Listening for target assembly name...");
-        Task.Run(async () =>
+        _ = Task.Run(async () =>
         {
             try
             {
@@ -36,7 +36,7 @@ internal class TargetAssemblyName
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex);
+                await Console.Error.WriteLineAsync(ex.ToString());
             }
         });
     }
