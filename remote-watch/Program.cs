@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
+using HotReload.Common;
 using Microsoft.DotNet.Cli.Utils;
 using Constants = HotReload.Common.Constants;
 
@@ -67,6 +68,7 @@ else
         TargetAssemblyName.Listen();
         NamedPipeForwarder.Start();
 
+        Console.CancelKeyPress += (_, e) => e.Cancel = true; // pass through to dotnet watch
         using var dotnetWatch = new Process
         {
             StartInfo = new ProcessStartInfo
@@ -76,9 +78,10 @@ else
                     ["watch", .. Environment.GetCommandLineArgs().Skip(1)]
                 ),
                 UseShellExecute = false,
-            }
+            },
+            EnableRaisingEvents = true,
         };
-        AppDomain.CurrentDomain.ProcessExit += (_, _) => dotnetWatch.Kill(entireProcessTree: true);
+        AppDomain.CurrentDomain.ProcessExit += (_, _) => dotnetWatch.KillTree();
         dotnetWatch.Start();
         await dotnetWatch.WaitForExitAsync();
 

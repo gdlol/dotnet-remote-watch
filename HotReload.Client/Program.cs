@@ -72,10 +72,12 @@ while (true)
         string fileName =
             Path.Combine(AppContext.BaseDirectory, targetAssemblyName) + Path.GetExtension(Environment.ProcessPath);
         Console.WriteLine($"Starting {fileName}...");
-        using var process = new Process();
-        process.StartInfo.FileName = fileName;
-        process.StartInfo.UseShellExecute = true;
-        void cleanup(object? _, EventArgs __) => process.Kill(entireProcessTree: true);
+        using var process = new Process
+        {
+            StartInfo = { FileName = fileName, UseShellExecute = true, },
+            EnableRaisingEvents = true
+        };
+        void cleanup(object? _, EventArgs __) => process.KillTree();
         AppDomain.CurrentDomain.ProcessExit += cleanup;
         process.Exited += (_, _) =>
         {
@@ -90,10 +92,7 @@ while (true)
         Console.WriteLine("Accepted named pipe connection from App.");
 
         await Task.WhenAny(StreamForwarder.ForwardAsync(channel.AsStream(), pipe), process.WaitForExitAsync());
-        if (!process.HasExited)
-        {
-            process.Kill(entireProcessTree: true);
-        }
+        process.KillTree();
         await process.WaitForExitAsync();
 
         Console.WriteLine();
