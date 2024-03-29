@@ -4,6 +4,7 @@ using Path = System.IO.Path;
 
 namespace Automation;
 
+[IsDependentOn(typeof(InstallRemoteWatch))]
 public class Test : FrostingTask<Context>
 {
     public override void Run(Context context)

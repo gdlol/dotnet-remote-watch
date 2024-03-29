@@ -1,0 +1,18 @@
+version: 1.0.{build}
+skip_non_tags: true
+skip_branch_with_pr: true
+image: Ubuntu2004
+build_script:
+  - sh: >-
+      set -e
+
+      npm install --global @devcontainers/cli
+
+      devcontainer build --workspace-folder .
+deploy_script:
+  - sh: >-
+      set -e
+
+      devcontainer up --workspace-folder .
+
+      devcontainer exec --workspace-folder . --remote-env NUGET_API_KEY=${NUGET_API_KEY} pnpm run publish

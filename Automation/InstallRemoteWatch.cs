@@ -33,7 +33,7 @@ public class InstallRemoteWatch : FrostingTask<Context>
                     .Append("drw")
                     .Append("--prerelease")
                     .Append("--global")
-                    .AppendSwitch("--add-source", Path.Combine(Context.ProjectRoot, "Bin"))
+                    .AppendSwitch("--add-source", Context.PackageOutputPath)
             );
         }
         finally
