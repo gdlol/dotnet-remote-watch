@@ -2,4 +2,4 @@
 using Cake.Frosting;
 
 Directory.SetCurrentDirectory(Context.Workspaces);
-CakeHost.Create().UseContext<Context>().Run(args.Concat(["--verbosity", "diagnostic"]));
+return CakeHost.Create().UseContext<Context>().Run(args.Concat(["--verbosity", "diagnostic"]));

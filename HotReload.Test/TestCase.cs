@@ -111,7 +111,8 @@ internal static class TestCase
 
             await verify(testProjectPath, watchServer, watchClient, pingListener, cts.Token);
 
-            watchClient.KillTree();
+            watchServer.KillTree();
+            await watchServer.WaitForExitAsync(cts.Token);
             await watchClient.WaitForExitAsync(cts.Token);
         }
         finally
