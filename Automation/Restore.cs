@@ -1,4 +1,3 @@
-using Automation.Tasks;
 using Cake.Common.Tools.Command;
 using Cake.Common.Tools.DotNet;
 using Cake.Frosting;

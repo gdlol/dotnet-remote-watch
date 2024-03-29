@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO.Pipelines;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using HotReload.Common;
 using Nerdbank.Streams;
 
@@ -10,7 +11,7 @@ int hotReloadPort = Environment.GetEnvironmentVariable(Constants.DotNet.HotReloa
     : 3000;
 Console.WriteLine($"Connecting to {Constants.DotNet.HotReloadPort} ({hotReloadPort})...");
 using var client = new TcpClient();
-await client.ConnectAsync(IPAddress.Loopback, 3000);
+await client.ConnectAsync(IPAddress.Loopback, hotReloadPort);
 Console.WriteLine("Connected.");
 using var stream = client.GetStream();
 await using var multiplexer = await MultiplexingStream.CreateAsync(
@@ -51,7 +52,7 @@ while (true)
         {
             long length = await reader.ReadLongAsync();
 
-            using var file = File.OpenWrite(Constants.DeltaApplierDllName);
+            using var file = File.OpenWrite(Path.Combine(AppContext.BaseDirectory, Constants.DeltaApplierDllName));
             var writer = PipeWriter.Create(file);
             await reader.ReadBytesAsync(writer, length);
         }
@@ -69,8 +70,11 @@ while (true)
         Environment.SetEnvironmentVariable(Constants.DotNet.Watch, "1");
         Environment.SetEnvironmentVariable(Constants.DotNet.ModifiableAssemblies, "debug");
 
-        string fileName =
-            Path.Combine(AppContext.BaseDirectory, targetAssemblyName) + Path.GetExtension(Environment.ProcessPath);
+        string fileName = Path.Combine(AppContext.BaseDirectory, targetAssemblyName);
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            fileName += ".exe";
+        }
         Console.WriteLine($"Starting {fileName}...");
         using var process = new Process
         {

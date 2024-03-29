@@ -15,7 +15,7 @@ internal static class NamedPipeForwarder
         int dotnetHotReloadPort = Environment.GetEnvironmentVariable(Constants.DotNet.HotReloadPort) is string port
             ? int.Parse(port)
             : 3000;
-        Logger.Log($"Listening on tcp://0.0.0.0:{dotnetHotReloadPort} (${Constants.DotNet.HotReloadPort})...");
+        Logger.Log($"Listening on tcp://0.0.0.0:{dotnetHotReloadPort} ({Constants.DotNet.HotReloadPort})...");
         var listener = new TcpListener(IPAddress.Any, dotnetHotReloadPort);
         listener.Start();
         Logger.Log(

@@ -37,7 +37,7 @@ internal class StartupHook
         string deltaApplierPath =
             hooks.FirstOrDefault(s => s.EndsWith(Constants.DeltaApplierDllName))
             ?? throw new InvalidOperationException(
-                $"${Constants.DeltaApplierDllName} not found in {Constants.DotNet.StartupHooks}."
+                $"{Constants.DeltaApplierDllName} not found in {Constants.DotNet.StartupHooks}."
             );
         Environment.SetEnvironmentVariable(Constants.DotNet.StartupHooks, string.Join(Path.PathSeparator, hooks));
 

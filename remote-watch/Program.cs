@@ -23,22 +23,36 @@ if (Environment.GetEnvironmentVariable(Constants.RemoteWatch.BuildClient) == "1"
     }
 
     Logger.Log($"Building {Constants.HotReloadClient}...");
-    var result = Command
-        .Create(
-            "dotnet",
-            [
-                "publish",
-                .. (string.IsNullOrEmpty(rid) ? Enumerable.Empty<string>() : ["--runtime", rid]),
-                "--output",
-                targetDir,
-                "--property:ImplicitUsings=enable",
-                "--property:Nullable=enable",
-                "--property:LangVersion=12.0",
-                Path.Combine(AppContext.BaseDirectory, Constants.HotReloadClient, $"{Constants.HotReloadClient}.csproj")
-            ]
-        )
-        .Execute();
-    return result.ExitCode;
+    string tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"));
+    Directory.CreateDirectory(tempPath);
+    try
+    {
+        Environment.SetEnvironmentVariable("ArtifactsPath", Path.Combine(tempPath, "artifacts"));
+        var result = Command
+            .Create(
+                "dotnet",
+                [
+                    "publish",
+                    .. (string.IsNullOrEmpty(rid) ? Enumerable.Empty<string>() : ["--runtime", rid]),
+                    "--output",
+                    targetDir,
+                    "--property:ImplicitUsings=enable",
+                    "--property:Nullable=enable",
+                    "--property:LangVersion=12.0",
+                    Path.Combine(
+                        AppContext.BaseDirectory,
+                        Constants.HotReloadClient,
+                        $"{Constants.HotReloadClient}.csproj"
+                    )
+                ]
+            )
+            .Execute();
+        return result.ExitCode;
+    }
+    finally
+    {
+        Directory.Delete(tempPath, recursive: true);
+    }
 }
 else
 {

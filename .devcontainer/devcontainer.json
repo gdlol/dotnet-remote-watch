@@ -43,5 +43,6 @@
   "onCreateCommand": {
     "csharpier": "dotnet tool install csharpier --global --version 0.27.3",
     "restore": "pnpm restore"
-  }
+  },
+  "postStartCommand": "pnpm install-remote-watch || true"
 }

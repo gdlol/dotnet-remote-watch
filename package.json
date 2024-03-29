@@ -8,7 +8,8 @@
     "install-remote-watch": "pnpm run cake InstallRemoteWatch",
     "lint": "pnpm run cake Lint",
     "publish": "pnpm run cake Publish",
-    "restore": "pnpm run cake Restore"
+    "restore": "pnpm run cake Restore",
+    "test": "pnpm run cake Test"
   },
   "devDependencies": {
     "@prettier/plugin-xml": "3.2.2",
