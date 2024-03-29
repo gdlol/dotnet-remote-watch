@@ -36,6 +36,24 @@ internal static class NamedPipeForwarder
                 using var pidChannel = await multiplexer.OfferChannelAsync(Constants.RemoteWatch.PidChannel);
                 using var healthChannel = await multiplexer.OfferChannelAsync(Constants.RemoteWatch.HealthChannel);
 
+                _ = Task.Run(async () =>
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            await Task.Delay(TimeSpan.FromSeconds(1));
+                            await healthChannel.Output.WriteIntAsync(0);
+                            await healthChannel.Input.ReadIntAsync();
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Client disconnected, exiting.");
+                            Environment.Exit(0);
+                        }
+                    }
+                });
+
                 while (true)
                 {
                     using var pipe = NamedPipe.CreateServer(pipeName);
@@ -53,17 +71,6 @@ internal static class NamedPipeForwarder
                         StreamForwarder.ForwardAsync(pipe, channel.AsStream()),
                         process.WaitForExitAsync()
                     );
-
-                    try
-                    {
-                        await healthChannel.Output.WriteIntAsync(0);
-                        await healthChannel.Input.ReadIntAsync();
-                    }
-                    catch (Exception)
-                    {
-                        Logger.Log("Client disconnected, exiting.");
-                        Environment.Exit(0);
-                    }
                 }
             }
             catch (Exception ex)
