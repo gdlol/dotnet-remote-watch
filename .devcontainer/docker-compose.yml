@@ -2,6 +2,8 @@ services:
   devcontainer:
     env_file:
       - .env
+    environment:
+      - AUTHORS=${AUTHORS:-}
     build:
       context: .
       dockerfile: Dockerfile

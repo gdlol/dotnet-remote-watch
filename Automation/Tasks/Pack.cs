@@ -10,9 +10,13 @@ public class Pack : FrostingTask<Context>
     public override void Run(Context context)
     {
         context.CleanDirectory(Context.PackageOutputPath);
-        var authors =
+        string authors =
             Environment.GetEnvironmentVariable("AUTHORS")
             ?? Command.Create("git", ["config", "user.name"]).CaptureStdOut().Execute().StdOut.Trim();
+        if (string.IsNullOrWhiteSpace(authors))
+        {
+            authors = "remote-watch";
+        }
         context.DotNetPack(
             Path.Combine(Context.ProjectRoot, "remote-watch"),
             new()
