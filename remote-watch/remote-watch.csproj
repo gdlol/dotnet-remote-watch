@@ -24,6 +24,6 @@
     <None Include="RemoteWatch.targets" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../HotReload.Common/*" CopyToOutputDirectory="PreserveNewest" LinkBase="HotReload.Common" />
     <None Include="../HotReload.Client/*" CopyToOutputDirectory="PreserveNewest" LinkBase="HotReload.Client" />
-    <None Include="$(ProjectRoot)ReadMe.md" Pack="true" PackagePath="/" />
+    <None Include="$(ReadMePath)" Condition="'$(ReadMePath)' != ''" Pack="true" PackagePath="/" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,9 @@ version: 1.0.{build}
 branches:
   only:
     - main
+environment:
+  README_ASSETS_PREFIX: ""
+  NUGET_API_KEY: NUGET_API_KEY
 skip_non_tags: true
 image: Ubuntu2004
 build_script:
@@ -17,4 +20,7 @@ deploy_script:
 
       devcontainer up --workspace-folder .
 
-      devcontainer exec --workspace-folder . --remote-env CI=true --remote-env NUGET_API_KEY=${NUGET_API_KEY} pnpm run publish
+      devcontainer exec --workspace-folder . \
+        --remote-env README_ASSETS_PREFIX=${README_ASSETS_PREFIX} \
+        --remote-env NUGET_API_KEY=${NUGET_API_KEY} \
+        pnpm run publish

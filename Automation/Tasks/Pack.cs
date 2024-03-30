@@ -5,9 +5,19 @@ using Microsoft.DotNet.Cli.Utils;
 
 namespace Automation.Tasks;
 
-public class Pack : FrostingTask<Context>
+public class Pack : AsyncFrostingTask<Context>
 {
-    public override void Run(Context context)
+    private static async Task<string> GetReadMePathAsync()
+    {
+        string readMePath = Path.Combine(Context.PackageOutputPath, "ReadMe.md");
+        string text = await File.ReadAllTextAsync(Path.Combine(Context.ProjectRoot, "ReadMe.md"));
+        string assetsPrefix = Environment.GetEnvironmentVariable("README_ASSETS_PREFIX") ?? string.Empty;
+        text = text.Replace("Assets/", $"{assetsPrefix}Assets/");
+        await File.WriteAllTextAsync(readMePath, text);
+        return readMePath;
+    }
+
+    public override async Task RunAsync(Context context)
     {
         context.CleanDirectory(Context.PackageOutputPath);
         string authors =
@@ -17,24 +27,34 @@ public class Pack : FrostingTask<Context>
         {
             authors = "remote-watch";
         }
-        context.DotNetPack(
-            Path.Combine(Context.ProjectRoot, "remote-watch"),
-            new()
-            {
-                MSBuildSettings = new()
+        string readMePath = await GetReadMePathAsync();
+        try
+        {
+            Environment.SetEnvironmentVariable("ReadMePath", readMePath);
+            context.DotNetPack(
+                Path.Combine(Context.ProjectRoot, "remote-watch"),
+                new()
                 {
-                    Properties =
+                    MSBuildSettings = new()
                     {
-                        ["PackageOutputPath"] = [Context.PackageOutputPath],
-                        ["Authors"] = [authors],
-                        ["PackageDescription"] = ["dotnet remote watch"],
-                        ["PackageLicenseExpression"] = ["MIT"],
-                        ["PackageRequireLicenseAcceptance"] = ["true"],
-                        ["PackageTags"] = ["remote watch hot reload"],
-                        ["PackageReadmeFile"] = ["ReadMe.md"]
+                        Properties =
+                        {
+                            ["PackageOutputPath"] = [Context.PackageOutputPath],
+                            ["Authors"] = [authors],
+                            ["PackageDescription"] = ["dotnet remote watch"],
+                            ["PackageLicenseExpression"] = ["MIT"],
+                            ["PackageRequireLicenseAcceptance"] = ["true"],
+                            ["PackageTags"] = ["remote watch hot reload"],
+                            ["PackageReadmeFile"] = ["ReadMe.md"],
+                            ["PublishRepositoryUrl"] = ["true"]
+                        }
                     }
                 }
-            }
-        );
+            );
+        }
+        finally
+        {
+            File.Delete(readMePath);
+        }
     }
 }
