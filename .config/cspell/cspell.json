@@ -2,5 +2,15 @@
   "version": "0.2",
   "enableGlobDot": true,
   "useGitignore": true,
-  "words": ["csharpierrc", "devcontainer", "devcontainers", "HOTRELOAD", "NAMEDPIPE", "Nerdbank", "packagejson"]
+  "ignorePaths": ["**/*.svg", "**/LICENSE"],
+  "words": [
+    "csharpierrc",
+    "devcontainer",
+    "devcontainers",
+    "HOTRELOAD",
+    "NAMEDPIPE",
+    "Nerdbank",
+    "packagejson",
+    "srcset"
+  ]
 }
