@@ -17,4 +17,4 @@ deploy_script:
 
       devcontainer up --workspace-folder .
 
-      devcontainer exec --workspace-folder . --remote-env NUGET_API_KEY=${NUGET_API_KEY} pnpm run publish
+      devcontainer exec --workspace-folder . --remote-env CI=true --remote-env NUGET_API_KEY=${NUGET_API_KEY} pnpm run publish
