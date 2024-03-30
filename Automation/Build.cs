@@ -8,6 +8,11 @@ public class Build : FrostingTask<Context>
 {
     public override void Run(Context context)
     {
-        context.DotNetBuild(Path.Combine(Context.ProjectRoot, "Traversal"));
+        string traversalPath = Path.Combine(Context.ProjectRoot, "Traversal");
+        context.DotNetClean(traversalPath);
+        context.DotNetBuild(
+            traversalPath,
+            new() { MSBuildSettings = new() { Properties = { ["TreatWarningsAsErrors"] = ["true"] } } }
+        );
     }
 }

@@ -2,4 +2,8 @@
   <PropertyGroup>
     <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <SourceRoot Include="$(MSBuildThisFileDirectory)" />
+  </ItemGroup>
 </Project>

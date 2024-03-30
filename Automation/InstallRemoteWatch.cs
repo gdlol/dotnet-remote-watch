@@ -3,7 +3,6 @@ using Cake.Common.Tools.Command;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Frosting;
-using Path = System.IO.Path;
 
 namespace Automation;
 

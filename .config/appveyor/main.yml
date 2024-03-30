@@ -14,8 +14,8 @@ test_script:
 
       devcontainer up --workspace-folder .
 
-      devcontainer exec --workspace-folder . pnpm build
-
       devcontainer exec --workspace-folder . pnpm lint
+
+      devcontainer exec --workspace-folder . pnpm build
 
       devcontainer exec --workspace-folder . pnpm test
