@@ -13,7 +13,8 @@
     "rc": "/home/dev/.config/pnpm/rc"
   },
   "prettier": {
-    ".prettierrc.json": ".prettierrc.json"
+    ".prettierrc.json": ".prettierrc.json",
+    ".prettierignore": ".prettierignore"
   },
   "workspaces": {
     "../git/attributes": ".gitattributes",
