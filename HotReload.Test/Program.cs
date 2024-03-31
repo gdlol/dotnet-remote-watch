@@ -54,15 +54,32 @@ await TestCase.RunAsync(
             testProgram.Kill();
             await testProgram.WaitForExitAsync(token);
 
-            Console.WriteLine("Updating program...");
             string program = await File.ReadAllTextAsync(Path.Combine(testProjectPath, "Program.cs"), token);
-            await File.WriteAllTextAsync(
-                Path.Combine(testProjectPath, "Program.cs"),
-                program.Replace("const byte value = 1;", "const byte value = 2;"),
+            string newProgram = program.Replace("const byte value = 1;", "const byte value = 2;");
+            using var cts = new CancellationTokenSource();
+            var update = Task.Run(
+                async () =>
+                {
+                    while (true)
+                    {
+                        await Task.Delay(TimeSpan.FromSeconds(3), cts.Token);
+                        Console.WriteLine("Updating program...");
+                        await File.WriteAllTextAsync(
+                            Path.Combine(testProjectPath, "Program.cs"),
+                            newProgram,
+                            cts.Token
+                        );
+                    }
+                },
                 token
             );
-
             await TestCase.ReceivePingAsync(pingListener, 2, token);
+            await cts.CancelAsync();
+            try
+            {
+                await update;
+            }
+            catch (OperationCanceledException) { }
         }
     );
 }
