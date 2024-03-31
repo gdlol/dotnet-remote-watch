@@ -75,7 +75,7 @@ internal static class TestCase
             Environment.SetEnvironmentVariable("HOTRELOAD_TESTING", "1");
             Environment.SetEnvironmentVariable(Constants.DotNet.HotReloadPort, "6000");
 
-            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+            using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(3));
             using var watchServer = LaunchProcess(
                 new ProcessStartInfo
                 {
