@@ -5,6 +5,10 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory).globalconfig" />
+  </ItemGroup>
+
   <PropertyGroup Condition="$(Configuration) == Release">
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
@@ -12,4 +16,6 @@
     <EmbedAllSources>true</EmbedAllSources>
     <PathMap>$(MSBuildProjectDirectory)=/_/$(MSBuildProjectName)</PathMap>
   </PropertyGroup>
+
+  <Import Project="Format.targets" Condition="'$(MSBuildProjectExtension)' == '.csproj'" />
 </Project>

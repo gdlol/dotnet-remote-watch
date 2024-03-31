@@ -25,7 +25,8 @@
         "files.associations": {
           "ignore": "ignore",
           "attributes": "properties",
-          "rc": "properties"
+          "rc": "properties",
+          "*.globalconfig": "ini"
         },
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",

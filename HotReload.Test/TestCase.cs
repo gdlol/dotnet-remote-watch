@@ -101,8 +101,7 @@ internal static class TestCase
                     {
                         if (ex.NativeErrorCode is not 2 and not 26)
                         {
-                            Console.WriteLine(ex.NativeErrorCode);
-                            await Console.Error.WriteLineAsync(ex.ToString());
+                            throw;
                         }
                     }
                 }

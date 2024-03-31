@@ -20,6 +20,7 @@ _ = Task.Run(async () =>
 
 static async Task PingAsync()
 {
+    Console.WriteLine($"Sending ping with value: {value}...");
     using var client = new TcpClient();
     await client.ConnectAsync(IPAddress.Loopback, pingPort);
     using var stream = client.GetStream();
