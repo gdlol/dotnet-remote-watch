@@ -2,11 +2,11 @@ version: 1.0.{build}
 branches:
   only:
     - main
+skip_non_tags: true
+image: Ubuntu2004
 environment:
   README_ASSETS_PREFIX: ""
   NUGET_API_KEY: NUGET_API_KEY
-skip_non_tags: true
-image: Ubuntu2004
 build_script:
   - sh: >-
       set -e
