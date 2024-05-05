@@ -9,13 +9,14 @@
     <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory).globalconfig" />
   </ItemGroup>
 
+  <Import Project="Format.targets" Condition="'$(MSBuildProjectExtension)' == '.csproj'" />
+
   <PropertyGroup Condition="$(Configuration) == Release">
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <DebugType>embedded</DebugType>
     <EmbedAllSources>true</EmbedAllSources>
     <PathMap>$(MSBuildProjectDirectory)=/_/$(MSBuildProjectName)</PathMap>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
-
-  <Import Project="Format.targets" Condition="'$(MSBuildProjectExtension)' == '.csproj'" />
 </Project>

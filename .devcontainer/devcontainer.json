@@ -42,8 +42,8 @@
     }
   },
   "onCreateCommand": {
-    "csharpier": "dotnet tool install csharpier --global --version 0.27.3",
+    "csharpier": "dotnet tool install csharpier --global --version 0.28.2",
+    "remote-watch": "dotnet tool install --global drw",
     "restore": "pnpm restore"
-  },
-  "postAttachCommand": "pnpm install-remote-watch || true"
+  }
 }
