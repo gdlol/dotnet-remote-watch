@@ -1,9 +1,9 @@
 <Project>
   <Target Name="DotNetFormatCheck" Condition="'$(DotNetFormatCheck)' == 'true'" AfterTargets="GetTargetPath">
-    <Exec Command="dotnet format --verify-no-changes" WorkingDirectory="$(MSBuildProjectDirectory)" />
+    <Exec Command="dotnet format style --verify-no-changes" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
   <Target Name="DotNetFormat" Condition="'$(DotNetFormat)' == 'true'" AfterTargets="GetTargetPath">
-    <Exec Command="dotnet format" WorkingDirectory="$(MSBuildProjectDirectory)" />
+    <Exec Command="dotnet format style" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 </Project>
