@@ -1,26 +1,15 @@
 {
-  "git": {
-    "attributes": "/home/dev/.config/git/attributes",
-    "ignore": "/home/dev/.config/git/ignore"
-  },
-  "csharpier": {
-    ".csharpierrc.json": ".csharpierrc.json"
-  },
-  "cspell": {
-    "cspell.json": "cspell.json"
-  },
-  "pnpm": {
-    "rc": "/home/dev/.config/pnpm/rc"
-  },
-  "prettier": {
-    ".prettierrc.json": ".prettierrc.json",
-    ".prettierignore": ".prettierignore"
-  },
+  "git": { "attributes": "/home/dev/.config/git/attributes", "ignore": "/home/dev/.config/git/ignore" },
+  "pnpm": { "rc": "/home/dev/.config/pnpm/rc" },
+  "prettier": { ".prettierrc.json": ".prettierrc.json", ".prettierignore": ".prettierignore" },
+  "cspell": { "cspell.json": "cspell.json" },
   "workspaces": {
     "../git/attributes": ".gitattributes",
     "../git/ignore": ".gitignore",
     "../../package.json": "package.json",
     "pnpm-workspace.yaml": "pnpm-workspace.yaml",
-    "Workspace.props": "Workspace.props"
-  }
+    "Directory.Build.props": "Directory.Build.props"
+  },
+  "csharpier": { ".csharpierrc.json": ".csharpierrc.json" },
+  "dotnet": { "tools.json": ".config/dotnet-tools.json" }
 }

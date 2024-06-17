@@ -6,5 +6,5 @@ namespace Automation;
 [IsDependentOn(typeof(PrettierCheck))]
 [IsDependentOn(typeof(DotNetFormatCheck))]
 [IsDependentOn(typeof(CSharpierCheck))]
-[IsDependentOn(typeof(SpellCheck))]
+[IsDependentOn(typeof(CSpell))]
 public class Lint : FrostingTask<Context>;

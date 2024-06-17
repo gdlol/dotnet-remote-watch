@@ -1,2 +1,1 @@
-is_global=true
 dotnet_diagnostic.IDE0005.severity=warning

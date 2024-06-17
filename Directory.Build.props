@@ -1,12 +1,12 @@
 <Project>
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
   <PropertyGroup>
     <ProjectRoot>$(MSBuildThisFileDirectory)</ProjectRoot>
     <PackageOutputPath>$(ProjectRoot)Bin</PackageOutputPath>
     <ConfigDirectory>$([MSBuild]::NormalizeDirectory($(ProjectRoot), ".config", "dotnet"))</ConfigDirectory>
     <DirectoryPackagesPropsPath>$(ConfigDirectory)Packages.props</DirectoryPackagesPropsPath>
-    <WorkspacePropsPath>$([MSBuild]::GetPathOfFileAbove('Workspace.props'))</WorkspacePropsPath>
   </PropertyGroup>
 
   <Import Project="$(ConfigDirectory)Project.props" />
-  <Import Project="$(WorkspacePropsPath)" Condition="Exists($(WorkspacePropsPath))" />
 </Project>
