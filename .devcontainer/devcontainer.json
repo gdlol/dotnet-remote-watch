@@ -1,25 +1,24 @@
+// spell-checker:ignore esbenp azuretools dotnettools
 {
   "name": "dotnet-remote-watch",
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
   "remoteUser": "dev",
-  "workspaceFolder": "/workspaces/dotnet-remote-watch",
   "overrideCommand": true,
+  "workspaceFolder": "/workspaces/dotnet-remote-watch",
   "features": {
-    "ghcr.io/devcontainer-config/features/user-init:1": {},
-    "ghcr.io/devcontainer-config/features/dot-config:1": {},
-    "ghcr.io/devcontainers/features/node:1": { "version": "20" },
+    "ghcr.io/devcontainer-config/features/user-init:2": {},
+    "ghcr.io/devcontainer-config/features/dot-config:2": {},
     "ghcr.io/devcontainers/features/dotnet:2": { "version": "8.0" }
   },
   "customizations": {
     "vscode": {
-      // spell-checker:ignore esbenp azuretools dotnettools
       "extensions": [
-        "csharpier.csharpier-vscode",
         "esbenp.prettier-vscode",
-        "streetsidesoftware.code-spell-checker",
         "ms-azuretools.vscode-docker",
-        "ms-dotnettools.csharp"
+        "streetsidesoftware.code-spell-checker",
+        "ms-dotnettools.csharp",
+        "csharpier.csharpier-vscode"
       ],
       "settings": {
         "files.associations": {
@@ -30,20 +29,12 @@
         },
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "[dockerfile]": {
-          "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-        },
-        "[csharp]": {
-          "editor.defaultFormatter": "csharpier.csharpier-vscode"
-        },
+        "[dockerfile]": { "editor.defaultFormatter": "ms-azuretools.vscode-docker" },
         "cSpell.autoFormatConfigFile": true,
-        "cSpell.checkOnlyEnabledFileTypes": false
+        "cSpell.checkOnlyEnabledFileTypes": false,
+        "[csharp]": { "editor.defaultFormatter": "csharpier.csharpier-vscode" }
       }
     }
   },
-  "onCreateCommand": {
-    "csharpier": "dotnet tool install csharpier --global --version 0.28.2",
-    "remote-watch": "dotnet tool install --global drw",
-    "restore": "pnpm restore"
-  }
+  "onCreateCommand": "pnpm install && pnpm restore"
 }

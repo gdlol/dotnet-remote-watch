@@ -8,7 +8,7 @@ public class DotNetFormatCheck : FrostingTask<Context>
     public override void Run(Context context)
     {
         context.DotNetMSBuild(
-            Path.Combine(Context.ProjectRoot, "Traversal"),
+            Context.ProjectRoot,
             new() { Targets = { "GetTargetPath" }, Properties = { ["DotNetFormatCheck"] = ["true"] } }
         );
     }
@@ -19,7 +19,7 @@ public class DotNetFormat : FrostingTask<Context>
     public override void Run(Context context)
     {
         context.DotNetMSBuild(
-            Path.Combine(Context.ProjectRoot, "Traversal"),
+            Context.ProjectRoot,
             new() { Targets = { "GetTargetPath" }, Properties = { ["DotNetFormat"] = ["true"] } }
         );
     }
