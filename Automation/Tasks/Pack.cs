@@ -45,9 +45,9 @@ public class Pack : AsyncFrostingTask<Context>
                             ["PackageLicenseExpression"] = ["MIT"],
                             ["PackageRequireLicenseAcceptance"] = ["true"],
                             ["PackageTags"] = ["remote watch hot reload"],
-                            ["PackageReadmeFile"] = ["ReadMe.md"]
-                        }
-                    }
+                            ["PackageReadmeFile"] = ["ReadMe.md"],
+                        },
+                    },
                 }
             );
         }

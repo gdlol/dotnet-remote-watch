@@ -2,8 +2,10 @@
   "version": "0.2",
   "enableGlobDot": true,
   "useGitignore": true,
+  "gitignoreRoot": ".",
   "ignorePaths": ["**/node_modules/**", "LICENSE", "**/*.svg"],
   "words": [
+    "csharpierignore",
     "csharpierrc",
     "devcontainer",
     "devcontainers",

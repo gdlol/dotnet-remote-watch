@@ -8,7 +8,7 @@
   "workspaceFolder": "/workspaces/dotnet-remote-watch",
   "features": {
     "ghcr.io/devcontainer-config/features/user-init:2": {},
-    "ghcr.io/devcontainer-config/features/dot-config:2": {},
+    "ghcr.io/devcontainer-config/features/dot-config:3": {},
     "ghcr.io/devcontainers/features/dotnet:2": { "version": "8.0" }
   },
   "customizations": {
@@ -29,7 +29,6 @@
         },
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "[dockerfile]": { "editor.defaultFormatter": "ms-azuretools.vscode-docker" },
         "cSpell.autoFormatConfigFile": true,
         "cSpell.checkOnlyEnabledFileTypes": false,
         "[csharp]": { "editor.defaultFormatter": "csharpier.csharpier-vscode" }

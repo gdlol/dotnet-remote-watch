@@ -28,7 +28,6 @@ static async Task PingAsync()
     await stream.FlushAsync();
 }
 
-
 {
     while (true)
     {

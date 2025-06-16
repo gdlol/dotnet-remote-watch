@@ -7,7 +7,7 @@ public class CSharpierCheck : FrostingTask<Context>
 {
     public override void Run(Context context)
     {
-        context.DotNetTool($"csharpier {Context.ProjectRoot} --check");
+        context.DotNetTool($"csharpier check {Context.ProjectRoot}");
     }
 }
 
@@ -15,6 +15,6 @@ public class CSharpierFormat : FrostingTask<Context>
 {
     public override void Run(Context context)
     {
-        context.DotNetTool($"csharpier {Context.ProjectRoot}");
+        context.DotNetTool($"csharpier format {Context.ProjectRoot}");
     }
 }

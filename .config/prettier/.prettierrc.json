@@ -1,6 +1,6 @@
 {
   "printWidth": 120,
-  "plugins": ["prettier-plugin-packagejson", "@prettier/plugin-xml", "prettier-plugin-ini"],
+  "plugins": ["prettier-plugin-packagejson", "prettier-plugin-sh", "@prettier/plugin-xml", "prettier-plugin-ini"],
   "xmlWhitespaceSensitivity": "ignore",
   "overrides": [
     { "files": "app.manifest", "options": { "parser": "xml" } },

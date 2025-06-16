@@ -20,7 +20,7 @@ public class Publish : FrostingTask<Context>
             {
                 Source = "https://api.nuget.org/v3/index.json",
                 ApiKey = apiKey,
-                SkipDuplicate = true
+                SkipDuplicate = true,
             }
         );
     }

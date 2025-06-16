@@ -43,7 +43,7 @@ if (Environment.GetEnvironmentVariable(Constants.RemoteWatch.BuildClient) == "1"
                         AppContext.BaseDirectory,
                         Constants.HotReloadClient,
                         $"{Constants.HotReloadClient}.csproj"
-                    )
+                    ),
                 ]
             )
             .Execute();
