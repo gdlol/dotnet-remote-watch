@@ -46,6 +46,7 @@ dotnet tool install --global drw
 
 ## Environment variables
 
+- `DOTNET_HOTRELOAD_HOST`: The hostname/IP address of the server, defaults to `localhost`.
 - `DOTNET_HOTRELOAD_PORT`: The port to use for the client-server communication, default is 3000.
 
 ## MSBuild

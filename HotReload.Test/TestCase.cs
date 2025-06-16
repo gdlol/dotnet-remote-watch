@@ -94,7 +94,7 @@ internal static class TestCase
                     try
                     {
                         return LaunchProcess(
-                            new ProcessStartInfo { FileName = hotReloadClientPath, UseShellExecute = false, }
+                            new ProcessStartInfo { FileName = hotReloadClientPath, UseShellExecute = false }
                         );
                     }
                     catch (Win32Exception ex)

@@ -35,7 +35,6 @@ await TestCase.RunAsync(
     }
 );
 
-
 {
     using var pidListener = new TcpListener(IPAddress.Loopback, TestCase.PidPort);
     pidListener.Start();
@@ -83,7 +82,6 @@ await TestCase.RunAsync(
         }
     );
 }
-
 
 {
     using var pidListener = new TcpListener(IPAddress.Loopback, TestCase.PidPort);

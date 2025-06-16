@@ -1,17 +1,19 @@
 using System.Diagnostics;
 using System.IO.Pipelines;
-using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using HotReload.Common;
 using Nerdbank.Streams;
 
+string hotReloadHost = Environment.GetEnvironmentVariable(Constants.DotNet.HotReloadHost) ?? "localhost";
 int hotReloadPort = Environment.GetEnvironmentVariable(Constants.DotNet.HotReloadPort) is string port
     ? int.Parse(port)
     : 3000;
-Console.WriteLine($"Connecting to {Constants.DotNet.HotReloadPort} ({hotReloadPort})...");
+Console.WriteLine(
+    $"Connecting to {Constants.DotNet.HotReloadHost}:{Constants.DotNet.HotReloadPort} ({hotReloadHost}:{hotReloadPort})..."
+);
 using var client = new TcpClient();
-await client.ConnectAsync(IPAddress.Loopback, hotReloadPort);
+await client.ConnectAsync(hotReloadHost, hotReloadPort);
 Console.WriteLine("Connected.");
 using var stream = client.GetStream();
 await using var multiplexer = await MultiplexingStream.CreateAsync(
@@ -78,8 +80,8 @@ while (true)
         Console.WriteLine($"Starting {fileName}...");
         using var process = new Process
         {
-            StartInfo = { FileName = fileName, UseShellExecute = true, },
-            EnableRaisingEvents = true
+            StartInfo = { FileName = fileName, UseShellExecute = true },
+            EnableRaisingEvents = true,
         };
         void cleanup(object? _, EventArgs __) => process.KillTree();
         AppDomain.CurrentDomain.ProcessExit += cleanup;

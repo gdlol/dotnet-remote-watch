@@ -14,6 +14,8 @@ public static class Constants
 
         public const string HotReloadNamedPipeName = "DOTNET_HOTRELOAD_NAMEDPIPE_NAME";
 
+        public const string HotReloadHost = "DOTNET_HOTRELOAD_HOST";
+
         public const string HotReloadPort = "DOTNET_HOTRELOAD_PORT";
 
         public const string ModifiableAssemblies = "DOTNET_MODIFIABLE_ASSEMBLIES";

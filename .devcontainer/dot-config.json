@@ -10,6 +10,6 @@
     "pnpm-workspace.yaml": "pnpm-workspace.yaml",
     "Directory.Build.props": "Directory.Build.props"
   },
-  "csharpier": { ".csharpierrc.json": ".csharpierrc.json" },
+  "csharpier": { ".csharpierrc.json": ".csharpierrc.json", ".csharpierignore": ".csharpierignore" },
   "dotnet": { "tools.json": ".config/dotnet-tools.json" }
 }

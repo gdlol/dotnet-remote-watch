@@ -13,9 +13,10 @@
   },
   "dependencies": {
     "@prettier/plugin-xml": "^3.4.1",
-    "cspell": "^8.8.4",
-    "prettier": "^3.3.2",
-    "prettier-plugin-ini": "^1.2.0",
-    "prettier-plugin-packagejson": "^2.5.0"
+    "cspell": "^8.19.4",
+    "prettier": "^3.5.3",
+    "prettier-plugin-ini": "^1.3.0",
+    "prettier-plugin-packagejson": "^2.5.15",
+    "prettier-plugin-sh": "^0.17.4"
   }
 }
